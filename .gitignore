@@ -1,3 +1,4 @@
 .env
 nohup.out
 github_events.csv
+__pycache__
