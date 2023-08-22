@@ -24,18 +24,24 @@ def load_jsonl_from_file(filename):
 # Load data from test.json
 github_data = load_jsonl_from_file(filepath)
 
+ssl_config = {
+    'ca': '/etc/ssl/cert.pem',
+}
+
 # Connect to the database
 connection = pymysql.connect(
     host=db_host,
     user=db_user,
     password=db_password,
     database=db_name,
-    port=int(port)
+    port=int(port),
+    ssl=ssl_config
 )
 
 try:
     with connection.cursor() as cursor:
         # Insert events
+        records_inserted = 0
         for event in github_data:
             id = int(event["id"])
             event_type = event["type"]
@@ -52,6 +58,11 @@ try:
 
             cursor.execute("INSERT INTO github_events (id, event_type, actor_id, repo_id, created_at) VALUES (%s, %s, %s, %s, %s)",
                            (id, event_type, actor_id, repo_id, created_at))
+            
+            # Update and print the record counter
+            records_inserted += 1
+            if records_inserted % 100 == 0:
+                print(f"{records_inserted} records inserted.")
 
     connection.commit()
 
