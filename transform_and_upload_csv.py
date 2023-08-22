@@ -40,7 +40,6 @@ with open(csv_filename, 'w', newline='', encoding='utf-8') as csvfile:
             'created_at': event["created_at"]
         })
 
-
 # # Upload CSV file to S3
 # s3 = boto3.client('s3')
 # s3_key = f'{s3_prefix}/{csv_filename}'
