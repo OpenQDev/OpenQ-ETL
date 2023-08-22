@@ -59,12 +59,12 @@ try:
             cursor.execute("INSERT INTO github_events (id, event_type, actor_id, repo_id, created_at) VALUES (%s, %s, %s, %s, %s)",
                            (id, event_type, actor_id, repo_id, created_at))
             
+            connection.commit()
+
             # Update and print the record counter
             records_inserted += 1
             if records_inserted % 100 == 0:
                 print(f"{records_inserted} records inserted.")
-
-    connection.commit()
 
 finally:
     connection.close()
