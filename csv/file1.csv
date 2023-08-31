@@ -1,2 +1,0 @@
-id,type,actor_id,actor_login,repo_id,repo_name,payload_action,payload_release_id,payload_release_author_login,payload_release_author_id,payload_release_tag_name,payload_release_name,created_at
-31085189246,ReleaseEvent,41898282,github-actions[bot],676746665,alsyundawy/revanced-apk-builder,published,117058116,github-actions[bot],41898282,18,ReVanced,2023-08-13T15:00:00Z

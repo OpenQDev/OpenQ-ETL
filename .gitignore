@@ -4,3 +4,6 @@ github_events.csv
 __pycache__/
 tmp/
 data/
+tidb-lightning.log
+csv/
+__pycache__
