@@ -1,0 +1,26 @@
+# tidb-lightning.toml
+
+[lightning]
+# Logs
+level = "info"
+file = "tidb-lightning.log"
+
+[tikv-importer]
+# "local" means data is sorted and written to the local disk first.
+# "tidb" means data is written directly to TiDB (this doesn't involve disk writes).
+backend = "local"
+
+# The local storage directory for "local" backend.
+sorted-kv-dir = "./tmp/sorted-kv-dir"
+
+[mydumper]
+# Data source directory, supports local path (like `/data/dump/`) or S3 path (like `s3://bucket-name/data-path`).
+data-source-dir = "s3://githubarchive?access-key=${AWS_ACCESS_KEY_ID}&secret-access-key=${AWS_SECRET_ACCESS_KEY}"
+
+[tidb]
+# Configuration for the target TiDB server.
+host = "127.0.0.1"
+port = 4000
+user = "root"
+password = ""
+status-port = 10080 # Status port of TiDB during the import
