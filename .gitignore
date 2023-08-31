@@ -2,3 +2,5 @@
 nohup.out
 github_events.csv
 __pycache__/
+tmp/
+data/

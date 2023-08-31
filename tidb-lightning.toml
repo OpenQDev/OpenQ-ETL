@@ -1,65 +1,22 @@
+# tidb-lightning.toml
 [lightning]
-# log
+# Logs
 level = "info"
 file = "tidb-lightning.log"
-max-size = 128              # MB
-max-days = 28
-max-backups = 14
-
-# Checks the cluster minimum requirements before start.
-check-requirements = true
-
-[mydumper]
-# The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
-data-source-dir = "/data/my_database"
 
 [tikv-importer]
-# Import mode. "local" means using the physical import mode.
+# "local" backend mode is chosen for better performance.
 backend = "local"
+# Temporary storage directory for the sorted Key-Value files.
+sorted-kv-dir = "/Users/alo/OpenQ-ETL/tmp/sorted-kv-dir"
 
-# The method to resolve the conflicting data.
-duplicate-resolution = 'remove'
-
-# The directory of local KV sorting.
-sorted-kv-dir = "./some-dir"
-
-# Limits the bandwidth in which TiDB Lightning writes data into each TiKV
-# node in the physical import mode. 0 by default, which means no limit.
-# store-write-bwlimit = "128MiB"
-
-# Specifies whether Physical Import Mode adds indexes via SQL. The default value is `false`, which means that TiDB Lightning will encode both row data and index data into KV pairs and import them into TiKV together. This mechanism is consistent with that of the historical versions. If you set it to `true`, it means that TiDB Lightning adds indexes via SQL after importing the row data.
-# The benefit of adding indexes via SQL is that you can separately import data and import indexes, and import data more quickly. After the data is imported, even if the indexes fail to be added, it does not affect the consistency of the imported data.
-# add-index-by-sql = false
+[mydumper]
+# Data source directory
+data-source-dir = "./csv/"
 
 [tidb]
-# The information of the target cluster. The address of any tidb-server from the cluster.
-host = "172.16.31.1"
+# TiDB server address
+host = "127.0.0.1"
 port = 4000
 user = "root"
-# Configure the password to connect to TiDB. Either plaintext or Base64 encoded.
-password = ""
-# Required. Table schema information is fetched from TiDB via this status-port.
 status-port = 10080
-# Required. The address of any pd-server from the cluster.
-pd-addr = "172.16.31.4:2379"
-# tidb-lightning imports the TiDB library, and generates some logs.
-# Set the log level of the TiDB library.
-log-level = "error"
-
-[post-restore]
-# Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
-# The following options are available:
-# - "required" (default): Perform admin checksum after importing. If checksum fails, TiDB Lightning will exit with failure.
-# - "optional": Perform admin checksum. If checksum fails, TiDB Lightning will report a WARN log but ignore any error.
-# - "off": Do not perform checksum after importing.
-# Note that since v4.0.8, the default value has changed from "true" to "required".
-#
-# Note:
-# 1. Checksum failure usually means import exception (data loss or data inconsistency), so it is recommended to always enable Checksum.
-# 2. For backward compatibility, bool values "true" and "false" are also allowed for this field.
-# "true" is equivalent to "required" and "false" is equivalent to "off".
-checksum = "required"
-
-# Specifies whether to perform `ANALYZE TABLE <table>` for each table after checksum is done.
-# Options available for this field are the same as `checksum`. However, the default value for this field is "optional".
-analyze = "optional"
