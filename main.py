@@ -12,10 +12,12 @@ def main():
 				start_date += datetime.timedelta(hours=1)
 				date_str = start_date.strftime("%Y-%m-%d-%H")
 				if os.path.exists(f"./csv/insights.github_events.{date_str.replace('-', '')}.csv"):
-					print(date_str, " already exists, skipping...")
+					print(date_str, "	already exists, skipping...")
 					continue
 				else:
-					print(date_str, "Downloading archive for: ", date_str)
+					print(date_str, "	downloading...")
+					extract.extract_data(date_str)
+					print(date_str, "	downloaded!")
 
 
 if __name__ == "__main__":
