@@ -16,12 +16,15 @@ def main():
 					continue
 				else:
 					print(date_str, "	downloading...")
-					extract.extract_data(date_str)
-					print(date_str, "	downloaded!")
-					print(date_str, "	transforming to CSV...")
-					transform.jsonl_to_csv(date_str)
-					print(date_str, "	transformed!")
-
+					archive_exists = extract.extract_data(date_str)
+					if archive_exists:
+						print(date_str, "	downloaded!")
+						print(date_str, "	transforming to CSV...")
+						transform.jsonl_to_csv(date_str)
+						print(date_str, "	transformed!")
+					else:
+							print(date_str, "	is not yet in Github Archive. Exiting...")
+							return
 
 if __name__ == "__main__":
     main()
