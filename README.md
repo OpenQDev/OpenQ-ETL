@@ -37,3 +37,12 @@ There are many different "type" for these events. But I ONLY want to persist the
 I want to convert these JSONL files into CSV files that can be imported efficiently to TiDB using TiDB Lightning.
 
 You'll also need to create a Repository, User and Event table schema in MySQL to handle all this.
+
+1. Download with wget from a list of hours starting at the date given as input
+   - if CSV of the format insights.github_events.{concatenated date}.csv already exists in the csv/ dir, skip to next hour
+   - if it does not exist, proceed
+
+2. Iterate over JSONL and convert relevant fields to CSV
+	 - Skip any where type != PushEvent
+	 - Ignore payload
+   - Write CSV object to new CSV file called insights.github_events.{concatenated date}.csv 
