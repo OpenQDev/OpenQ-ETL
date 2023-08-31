@@ -7,3 +7,4 @@ data/
 tidb-lightning.log
 csv/
 __pycache__
+.gitignore
