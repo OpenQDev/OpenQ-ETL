@@ -5,7 +5,10 @@
 https://docs.pingcap.com/tidb/stable/tidb-lightning-overview
 
 tiup playground
+
 tiup tidb-lightning -backend local -config tidb-lightning.toml
+
+tiup tidb-lightning -backend local -config tidb-lightning.s3.toml
 
 https://docs.pingcap.com/tidb/stable/migrate-from-csv-files-to-tidb
 

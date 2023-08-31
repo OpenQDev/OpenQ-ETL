@@ -15,7 +15,7 @@ sorted-kv-dir = "./tmp/sorted-kv-dir"
 
 [mydumper]
 # Data source directory, supports local path (like `/data/dump/`) or S3 path (like `s3://bucket-name/data-path`).
-data-source-dir = "s3://githubarchive?access-key=${AWS_ACCESS_KEY_ID}&secret-access-key=${AWS_SECRET_ACCESS_KEY}"
+data-source-dir = "s3://githubarchive?access-key=&secret-access-key="
 
 [tidb]
 # Configuration for the target TiDB server.

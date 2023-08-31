@@ -32,5 +32,7 @@ def jsonl_to_csv(date_str):
                     event['actor']['avatar_url'],
                     event['repo']['id'],
                     event['repo']['name'],
+                    "NO_EMAIL",
+                    "NO_NAME",
                     event['created_at']
                 ])

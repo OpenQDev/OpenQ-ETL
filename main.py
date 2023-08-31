@@ -46,6 +46,12 @@ def main():
             print(date_str, "	uploading to S3...")
             load.upload_to_s3(f"./csv/insights.github_events.{date_str.replace('-', '')}.csv")
             print(date_str, "	uploaded to S3!")
+            # Delete the contents of the data/ folder
+            folder_path = "./data/"
+            for filename in os.listdir(folder_path):
+                file_path = os.path.join(folder_path, filename)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
           else:
               print(date_str, "	is not yet in Github Archive. Exiting...")
               return
